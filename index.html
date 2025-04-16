@@ -1,118 +1,133 @@
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <title>5월 선물 추천 생성기</title>
+  <title>5월 선물 추천기 | MBTI+직업 전체 선택</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="MBTI와 직업을 기반으로 5월 기념일 맞춤 선물 추천! 어버이날, 스승의날, 성년의날 선물 고민 끝!">
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #f0f8ff;
-      margin: 0;
-      padding: 40px 20px;
+      font-family: 'Arial', sans-serif;
+      background: #f3faff;
+      padding: 30px;
       color: #333;
     }
     h1 {
       text-align: center;
-      color: #2c3e50;
+      color: #007acc;
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 15px;
     }
     select, button {
-      padding: 12px;
-      margin: 8px 4px;
+      padding: 10px;
+      margin-top: 5px;
       font-size: 16px;
-      border-radius: 8px;
+      width: 100%;
+      max-width: 400px;
+      border-radius: 6px;
       border: 1px solid #ccc;
     }
     button {
-      background-color: #ffe082;
+      background-color: #ffe066;
       font-weight: bold;
-      color: #000;
+      margin-top: 20px;
       cursor: pointer;
-      border: none;
-    }
-    button:hover {
-      background-color: #ffd54f;
-    }
-    .form-section {
-      max-width: 500px;
-      margin: 0 auto;
-      text-align: center;
     }
     .result {
-      background: #ffffff;
-      border-radius: 12px;
+      background: #fff;
       padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
       margin-top: 30px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-    ul {
-      text-align: left;
     }
   </style>
 </head>
 <body>
   <h1>🎁 5월 선물 추천 생성기</h1>
-  <div class="form-section">
-    <select id="occasion">
-      <option>어린이날</option>
-      <option>어버이날</option>
-      <option>스승의날</option>
-      <option>부부의날</option>
-      <option>성년의날</option>
-    </select>
-    <select id="budget">
-      <option>3만원</option>
-      <option>3~5만원</option>
-      <option>5만원</option>
-      <option>10만원 이상</option>
-    </select>
-    <select id="mbti">
-      <option value="">MBTI 선택 (선택사항)</option>
-      <option>INFP</option>
-      <option>ESTJ</option>
-      <option>ENFP</option>
-    </select>
-    <select id="job">
-      <option value="">직업 선택 (선택사항)</option>
-      <option>학생</option>
-      <option>직장인</option>
-      <option>예술가</option>
-    </select>
-    <br />
-    <button onclick="recommendGift()">🎈 선물 추천 받기</button>
-  </div>
+
+  <label for="occasion">기념일 선택</label>
+  <select id="occasion">
+    <option>어린이날</option>
+    <option>어버이날</option>
+    <option>스승의날</option>
+    <option>부부의날</option>
+    <option>성년의날</option>
+  </select>
+
+  <label for="budget">예산 선택</label>
+  <select id="budget">
+    <option>3만원</option>
+    <option>3~5만원</option>
+    <option>5만원</option>
+    <option>10만원 이상</option>
+  </select>
+
+  <label for="mbti">MBTI 선택 (선택사항)</label>
+  <select id="mbti">
+    <option value="">선택 안함</option>
+    <option>ISFJ</option><option>ISTJ</option><option>INFJ</option><option>INTJ</option>
+    <option>ISFP</option><option>ISTP</option><option>INFP</option><option>INTP</option>
+    <option>ESFJ</option><option>ESTJ</option><option>ENFJ</option><option>ENTJ</option>
+    <option>ESFP</option><option>ESTP</option><option>ENFP</option><option>ENTP</option>
+  </select>
+
+  <label for="job">직업 선택 (선택사항)</label>
+  <select id="job">
+    <option value="">선택 안함</option>
+    <option>학생</option><option>직장인</option><option>주부</option><option>프리랜서</option>
+    <option>예술가</option><option>공무원</option><option>교사</option><option>간호사</option>
+    <option>개발자</option><option>창업가</option>
+  </select>
+
+  <button onclick="recommendGift()">🎉 선물 추천 받기</button>
+
   <div class="result" id="result" style="display:none">
-    <h2>🎉 추천 선물</h2>
+    <h3>추천 선물:</h3>
     <ul id="giftOutput"></ul>
   </div>
+
   <script>
     const giftDB = {
       "어버이날": {
-        "3만원": ["비누꽃", "카네이션", "건강차", "핸드크림", "무릎담요"],
-        "5만원": ["홍삼", "마사지기", "수건세트", "꽃바구니", "식기세트"],
-        "10만원 이상": ["안마의자", "건강검진권", "프리미엄 홍삼", "가전제품", "호텔 숙박권"]
+        "3만원": ["비누꽃 카네이션", "감사 메시지 카드", "핸드크림", "건강차", "소형 무릎담요"],
+        "5만원": ["플라워 용돈박스", "마사지 쿠션", "홍삼 스틱", "수건 세트", "체중계"],
+        "10만원 이상": ["안마의자", "고급 가전", "호텔 숙박권", "명품 지갑", "스마트폰"]
       }
     };
+
     function recommendGift() {
       const occasion = document.getElementById("occasion").value;
       const budget = document.getElementById("budget").value;
       const mbti = document.getElementById("mbti").value;
       const job = document.getElementById("job").value;
       const output = document.getElementById("giftOutput");
+      const resultBox = document.getElementById("result");
+
       output.innerHTML = "";
-      const suggestions = giftDB[occasion]?.[budget] || ["추천 항목이 없습니다."];
-      const results = suggestions.sort(() => 0.5 - Math.random()).slice(0, 3);
-      results.forEach(item => {
-        const li = document.createElement("li");
-        li.textContent = `🎁 ${item}`;
-        output.appendChild(li);
-      });
-      if (mbti === "INFP" || job === "예술가") {
-        output.innerHTML += "<li>🎨 감성 디자인 엽서 세트</li>";
-      } else if (mbti === "ESTJ" || job === "직장인") {
-        output.innerHTML += "<li>📔 실용적인 다이어리 + 펜 세트</li>";
+      const items = giftDB[occasion] && giftDB[occasion][budget] ? giftDB[occasion][budget] : [];
+
+      if (items.length > 0) {
+        const shuffled = items.sort(() => 0.5 - Math.random());
+        shuffled.slice(0, 3).forEach(item => {
+          output.innerHTML += `<li>● ${item}</li>`;
+        });
+
+        // 조건 기반 추천 예시
+        if (mbti.startsWith("I")) {
+          output.innerHTML += "<li>● 조용히 쉴 수 있는 힐링 선물 추천 (내향형)</li>";
+        }
+        if (job === "교사") {
+          output.innerHTML += "<li>● 교사 전용 실용템 추천 (책상 위 필수템)</li>";
+        }
+      } else {
+        output.innerHTML = "<li>추천 결과가 없습니다.</li>";
       }
-      document.getElementById("result").style.display = "block";
+
+      resultBox.style.display = "block";
     }
   </script>
 </body>
