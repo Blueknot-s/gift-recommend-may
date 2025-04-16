@@ -3,9 +3,9 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <title>5월 선물 추천기 | 전체 기념일 지원</title>
+  <title>5월 선물 추천기 | 전체 기념일 + MBTI/직업</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="어린이날, 어버이날, 스승의날, 부부의날, 성년의날 기념일별 예산 맞춤 선물 추천기">
+  <meta name="description" content="어린이날, 어버이날, 스승의날, 부부의날, 성년의날 맞춤 선물 추천기! MBTI와 직업도 선택 가능!">
   <style>
     body { font-family: Arial, sans-serif; background: #f8fbff; padding: 30px; color: #333; }
     h1 { text-align: center; color: #0077aa; }
@@ -44,6 +44,23 @@
     <option>10만원 이상</option>
   </select>
 
+  <label for="mbti">MBTI 선택 (선택사항)</label>
+  <select id="mbti">
+    <option value="">선택 안함</option>
+    <option>ISFJ</option><option>ISTJ</option><option>INFJ</option><option>INTJ</option>
+    <option>ISFP</option><option>ISTP</option><option>INFP</option><option>INTP</option>
+    <option>ESFJ</option><option>ESTJ</option><option>ENFJ</option><option>ENTJ</option>
+    <option>ESFP</option><option>ESTP</option><option>ENFP</option><option>ENTP</option>
+  </select>
+
+  <label for="job">직업 선택 (선택사항)</label>
+  <select id="job">
+    <option value="">선택 안함</option>
+    <option>학생</option><option>직장인</option><option>주부</option><option>프리랜서</option>
+    <option>예술가</option><option>공무원</option><option>교사</option><option>간호사</option>
+    <option>개발자</option><option>창업가</option>
+  </select>
+
   <p class="note">※ MBTI와 직업은 선택하지 않아도 추천이 가능합니다.</p>
 
   <button onclick="recommendGift()">🎉 선물 추천 받기</button>
@@ -71,20 +88,22 @@
         "10만원 이상": ["전자책 단말기", "안마기", "명품 펜", "도서상품권", "스마트 워치"]
       },
       "부부의날": {
-        "3만원": ["커플 컵", "미니 꽃다발", "메시지 캔들", "커플 키링", "간단한 홈카페 세트"],
-        "5만원": ["레스토랑 상품권", "와인 & 잔 세트", "커플 잠옷", "향수", "홈시네마 용품"],
+        "3만원": ["커플 컵", "미니 꽃다발", "메시지 캔들", "커플 키링", "홈카페 세트"],
+        "5만원": ["레스토랑 상품권", "와인 잔 세트", "커플 잠옷", "향수", "홈시네마 용품"],
         "10만원 이상": ["호텔 숙박권", "부부 스파 이용권", "명품 향수", "커플 시계", "커플 여행 패키지"]
       },
       "성년의날": {
-        "3만원": ["장미꽃 + 메시지 카드", "향수 미니어처", "가죽 키링", "편지 세트", "액세서리"],
-        "5만원": ["지갑", "향수", "팔찌/목걸이", "포토앨범 키트", "기념 우드액자"],
-        "10만원 이상": ["명품 지갑", "디자이너 향수", "스마트워치", "정장 셔츠/블라우스", "고급 만년필"]
+        "3만원": ["장미꽃 + 카드", "향수 미니어처", "가죽 키링", "편지 세트", "액세서리"],
+        "5만원": ["지갑", "향수", "팔찌/목걸이", "포토앨범 키트", "우드액자"],
+        "10만원 이상": ["명품 지갑", "디자이너 향수", "스마트워치", "정장 셔츠", "고급 만년필"]
       }
     };
 
     function recommendGift() {
       const occasion = document.getElementById("occasion").value;
       const budget = document.getElementById("budget").value;
+      const mbti = document.getElementById("mbti").value;
+      const job = document.getElementById("job").value;
       const output = document.getElementById("giftOutput");
       const resultBox = document.getElementById("result");
 
@@ -96,6 +115,13 @@
         shuffled.slice(0, 3).forEach(item => {
           output.innerHTML += `<li>● ${item}</li>`;
         });
+
+        if (mbti.startsWith("I")) {
+          output.innerHTML += "<li>● 조용히 쉴 수 있는 힐링템 추천 (내향형)</li>";
+        }
+        if (job === "교사") {
+          output.innerHTML += "<li>● 책상 위 실용템 추천 (교사용)</li>";
+        }
       } else {
         output.innerHTML = "<li>추천 결과가 없습니다.</li>";
       }
