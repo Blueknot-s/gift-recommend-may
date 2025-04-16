@@ -3,71 +3,103 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <title>5월 선물 추천기 | 전체 기념일 + MBTI/직업</title>
+  <title>5월 선물 추천기 | 전체 기념일 + MBTI/직업 + 가운데 정렬</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="어린이날, 어버이날, 스승의날, 부부의날, 성년의날 맞춤 선물 추천기! MBTI와 직업도 선택 가능!">
+  <meta name="description" content="모바일/PC 최적화! 기념일별 선물 추천기. MBTI와 직업도 선택 가능!">
   <style>
-    body { font-family: Arial, sans-serif; background: #f8fbff; padding: 30px; color: #333; }
-    h1 { text-align: center; color: #0077aa; }
-    label { font-weight: bold; display: block; margin-top: 15px; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8fbff;
+      padding: 30px 20px;
+      color: #333;
+    }
+    .wrapper {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    h1 {
+      text-align: center;
+      color: #0077aa;
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 15px;
+    }
     select, button {
-      padding: 10px; margin-top: 5px; font-size: 16px;
-      width: 100%; max-width: 400px; border-radius: 6px; border: 1px solid #ccc;
+      padding: 10px;
+      margin-top: 5px;
+      font-size: 16px;
+      width: 100%;
+      border-radius: 6px;
+      border: 1px solid #ccc;
     }
     button {
-      background-color: #ffe066; font-weight: bold;
-      margin-top: 20px; cursor: pointer;
+      background-color: #ffe066;
+      font-weight: bold;
+      margin-top: 20px;
+      cursor: pointer;
     }
     .result {
-      background: #fff; padding: 20px; border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1); margin-top: 30px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      margin-top: 30px;
     }
-    .note { font-size: 14px; color: #666; margin-top: 5px; margin-bottom: 15px; }
+    .note {
+      font-size: 14px;
+      color: #666;
+      margin-top: 5px;
+      margin-bottom: 15px;
+    }
   </style>
 </head>
 <body>
-  <h1>🎁 5월 선물 추천 생성기</h1>
+  <div class="wrapper">
+    <h1>🎁 5월 선물 추천 생성기</h1>
 
-  <label for="occasion">기념일 선택</label>
-  <select id="occasion">
-    <option>어린이날</option>
-    <option>어버이날</option>
-    <option>스승의날</option>
-    <option>부부의날</option>
-    <option>성년의날</option>
-  </select>
+    <label for="occasion">기념일 선택</label>
+    <select id="occasion">
+      <option>어린이날</option>
+      <option>어버이날</option>
+      <option>스승의날</option>
+      <option>부부의날</option>
+      <option>성년의날</option>
+    </select>
 
-  <label for="budget">예산 선택</label>
-  <select id="budget">
-    <option>3만원</option>
-    <option>5만원</option>
-    <option>10만원 이상</option>
-  </select>
+    <label for="budget">예산 선택</label>
+    <select id="budget">
+      <option>3만원</option>
+      <option>5만원</option>
+      <option>10만원 이상</option>
+    </select>
 
-  <label for="mbti">MBTI 선택 (선택사항)</label>
-  <select id="mbti">
-    <option value="">선택 안함</option>
-    <option>ISFJ</option><option>ISTJ</option><option>INFJ</option><option>INTJ</option>
-    <option>ISFP</option><option>ISTP</option><option>INFP</option><option>INTP</option>
-    <option>ESFJ</option><option>ESTJ</option><option>ENFJ</option><option>ENTJ</option>
-    <option>ESFP</option><option>ESTP</option><option>ENFP</option><option>ENTP</option>
-  </select>
+    <label for="mbti">MBTI 선택 (선택사항)</label>
+    <select id="mbti">
+      <option value="">선택 안함</option>
+      <option>ISFJ</option><option>ISTJ</option><option>INFJ</option><option>INTJ</option>
+      <option>ISFP</option><option>ISTP</option><option>INFP</option><option>INTP</option>
+      <option>ESFJ</option><option>ESTJ</option><option>ENFJ</option><option>ENTJ</option>
+      <option>ESFP</option><option>ESTP</option><option>ENFP</option><option>ENTP</option>
+    </select>
 
-  <label for="job">직업 선택 (선택사항)</label>
-  <select id="job">
-    <option value="">선택 안함</option>
-    <option>학생</option><option>직장인</option><option>주부</option><option>프리랜서</option>
-    <option>예술가</option><option>공무원</option><option>교사</option><option>간호사</option>
-    <option>개발자</option><option>창업가</option>
-  </select>
+    <label for="job">직업 선택 (선택사항)</label>
+    <select id="job">
+      <option value="">선택 안함</option>
+      <option>학생</option><option>직장인</option><option>주부</option><option>프리랜서</option>
+      <option>예술가</option><option>공무원</option><option>교사</option><option>간호사</option>
+      <option>개발자</option><option>창업가</option>
+    </select>
 
-  <p class="note">※ MBTI와 직업은 선택하지 않아도 추천이 가능합니다.</p>
+    <p class="note">※ MBTI와 직업은 선택하지 않아도 추천이 가능합니다.</p>
 
-  <button onclick="recommendGift()">🎉 선물 추천 받기</button>
+    <button onclick="recommendGift()">🎉 선물 추천 받기</button>
 
-  <div class="result" id="result" style="display:none">
-    <h3>추천 선물:</h3>
-    <ul id="giftOutput"></ul>
+    <div class="result" id="result" style="display:none">
+      <h3>추천 선물:</h3>
+      <ul id="giftOutput"></ul>
+    </div>
   </div>
 
   <script>
