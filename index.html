@@ -3,9 +3,9 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <title>5월 선물 추천기 | MBTI+직업 전체 선택</title>
+  <title>5월 선물 추천기 | MBTI+직업 선택은 선택사항!</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="MBTI와 직업을 기반으로 5월 기념일 맞춤 선물 추천! 어버이날, 스승의날, 성년의날 선물 고민 끝!">
+  <meta name="description" content="MBTI와 직업은 선택하지 않아도 추천 OK! 어버이날·스승의날·성년의날 맞춤 선물 추천기">
   <style>
     body {
       font-family: 'Arial', sans-serif;
@@ -43,6 +43,12 @@
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
       margin-top: 30px;
+    }
+    .note {
+      font-size: 14px;
+      color: #555;
+      margin-top: 5px;
+      margin-bottom: 15px;
     }
   </style>
 </head>
@@ -83,6 +89,8 @@
     <option>개발자</option><option>창업가</option>
   </select>
 
+  <p class="note">※ MBTI와 직업은 선택하지 않아도 추천이 가능합니다.</p>
+
   <button onclick="recommendGift()">🎉 선물 추천 받기</button>
 
   <div class="result" id="result" style="display:none">
@@ -116,7 +124,6 @@
           output.innerHTML += `<li>● ${item}</li>`;
         });
 
-        // 조건 기반 추천 예시
         if (mbti.startsWith("I")) {
           output.innerHTML += "<li>● 조용히 쉴 수 있는 힐링 선물 추천 (내향형)</li>";
         }
