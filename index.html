@@ -1,0 +1,113 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>5월 선물 추천 생성기</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="어린이날, 어버이날, 스승의날, 부부의날, 성년의날 맞춤형 선물 추천 생성기">
+  <style>
+    body { font-family: 'Arial', sans-serif; padding: 20px; background: #f9f9f9; }
+    h1 { color: #333; }
+    select, button { padding: 10px; margin: 10px 5px 10px 0; font-size: 16px; }
+    .result { background: #fff; padding: 20px; border-radius: 8px;
+              box-shadow: 0 0 10px rgba(0,0,0,0.1); margin-top: 20px; }
+    .btn-group { margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h1>5월 선물 추천 생성기</h1>
+  <label for="occasion">기념일 선택:</label><br>
+  <select id="occasion">
+    <option>어린이날</option>
+    <option>어버이날</option>
+    <option>스승의날</option>
+    <option>부부의날</option>
+    <option>성년의날</option>
+  </select><br>
+  <label for="budget">예산 선택:</label><br>
+  <select id="budget">
+    <option>3만원</option>
+    <option>3~5만원</option>
+    <option>5만원</option>
+    <option>10만원 이상</option>
+  </select><br>
+  <label for="mbti">MBTI 선택 (선택사항):</label><br>
+  <select id="mbti">
+    <option value="">선택 안함</option>
+    <option>ISFJ</option>
+    <option>ENTP</option>
+    <option>INFJ</option>
+    <option>ESTJ</option>
+    <option>INFP</option>
+    <option>ENFP</option>
+  </select><br>
+  <label for="job">직업 선택 (선택사항):</label><br>
+  <select id="job">
+    <option value="">선택 안함</option>
+    <option>학생</option>
+    <option>직장인</option>
+    <option>주부</option>
+    <option>프리랜서</option>
+    <option>예술가</option>
+  </select><br>
+  <button onclick="recommendGift()">선물 추천 받기</button>
+  <div class="result" id="result" style="display:none">
+    <h3>추천 선물:</h3>
+    <ul id="giftOutput"></ul>
+    <div class="btn-group">
+      <button onclick="recommendGift()">다시 추천받기</button>
+      <button onclick="copyResult()">복사하기</button>
+      <button onclick="shareLink()">공유하기</button>
+    </div>
+  </div>
+  <script>
+    const giftDB = {
+      "어버이날": {
+        "3만원": ["비누꽃 카네이션", "용돈봉투 세트", "감사 메시지 카드", "디퓨저", "손 마사지기", "건강차", "무릎담요", "핸드크림", "브로치", "소형 화분"],
+        "5만원": ["플라워 용돈박스", "수건 세트", "마사지 쿠션", "홍삼 스틱", "전기주전자", "기능성 베개", "체중계", "스마트폰 거치대", "아로마 캔들", "건강 보조 식품"],
+        "10만원 이상": ["안마의자", "건강검진 패키지", "고급 가전", "호텔 숙박권", "명품 지갑", "홍삼 농축액", "보청기", "스마트폰", "명품 스카프", "식기 세트"]
+      },
+      "성년의날": {
+        "3만원": ["장미꽃 + 손편지", "미니 향수", "초콜릿", "메시지 카드 + 캔들", "핸드크림", "액자", "브로치", "거울", "양말", "키링"],
+        "3~5만원": ["브랜드 향수", "꽃다발 세트", "디퓨저 + 캔들", "도서 세트", "컬러 진단 키트", "미용세트", "다이어리", "탁상시계", "티 세트", "에코백"],
+        "5만원": ["샤넬 향수", "실버 주얼리", "무드등", "스마트워치", "애프터눈 티", "파우치", "포토 프린터", "브랜드 시계", "뷰티 디바이스", "네일샵 상품권"],
+        "10만원 이상": ["골드 주얼리", "명품 향수", "가죽 지갑", "애플워치", "리조트 숙박권", "시계 컬렉션", "미용기기", "사진 촬영권", "해외여행 바우처", "각인 반지"]
+      }
+    };
+    function recommendGift() {
+      const occasion = document.getElementById("occasion").value;
+      const budget = document.getElementById("budget").value;
+      const mbti = document.getElementById("mbti").value;
+      const job = document.getElementById("job").value;
+      const resultBox = document.getElementById("result");
+      const output = document.getElementById("giftOutput");
+      output.innerHTML = "";
+      const suggestions = (giftDB[occasion] && giftDB[occasion][budget]) ? giftDB[occasion][budget] : null;
+      if (!suggestions) {
+        output.innerHTML = "<li>추천 결과가 없습니다.</li>";
+      } else {
+        const shuffled = suggestions.sort(() => 0.5 - Math.random());
+        shuffled.slice(0, 3).forEach(item => {
+          const li = document.createElement("li");
+          li.innerText = `● ${item}`;
+          output.appendChild(li);
+        });
+        if (mbti === "INFP" || job === "예술가") {
+          output.innerHTML += "<li>● 감성 디자인 엽서 세트 (감성형 추천)</li>";
+        } else if (mbti === "ESTJ" || job === "직장인") {
+          output.innerHTML += "<li>● 실용적인 다이어리 + 볼펜 세트 (실용형 추천)</li>";
+        }
+      }
+      resultBox.style.display = "block";
+    }
+    function copyResult() {
+      const text = Array.from(document.querySelectorAll("#giftOutput li")).map(li => li.innerText).join("\n");
+      navigator.clipboard.writeText(text).then(() => alert("복사되었습니다!"));
+    }
+    function shareLink() {
+      navigator.clipboard.writeText(window.location.href).then(() => alert("링크가 복사되었습니다!"));
+    }
+  </script>
+</body>
+</html>
